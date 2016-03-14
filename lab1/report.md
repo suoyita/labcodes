@@ -263,8 +263,8 @@ readsect(void *dst, uint32_t secno) {
         uint16_t e_shentsize; // size of an entry in section header
         uint16_t e_shnum;     // number of entries in section header or 0
         uint16_t e_shstrndx;  // section number that contains section name strings
-};
-```
+	};
+
 <br>
 ## 练习5：实现函数调用堆栈跟踪函数
 > * 输出是
@@ -295,6 +295,7 @@ readsect(void *dst, uint32_t secno) {
     地址其后四个为传入bootmain的参数，也可能并没有
     传入如此多的参数
 ```
+
 <br>
 ## 练习6：完善中断初始化和处理
 1、中断描述符表（也可简称为保护模式下的中断向量表）中一个表项占多少字节？其中哪几位代表中断处理代码的入口？
@@ -306,4 +307,4 @@ readsect(void *dst, uint32_t secno) {
 <br>
 ##重要的知识点
 
-中断描述符表。对应知识点：中断描述符表。含义：将每个异常或中断向量分别与它们的处理过程联系起来，记录它们的入口地址、特权级等信息的表。
+> 中断描述符表。对应知识点：中断描述符表。含义：将每个异常或中断向量分别与它们的处理过程联系起来，记录它们的入口地址、特权级等信息的表。
