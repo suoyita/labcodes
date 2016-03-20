@@ -201,6 +201,7 @@ seta20.2:
 ## 练习4：分析bootloader加载ELF格式的OS的过程
 1、bootloader是如何读取磁盘扇区的？
 > * 用readsect函数读取磁盘扇区。readsect函数调用了waitdisk、outb、insl这三个基本磁盘操作。
+
 ```
 static void
 readsect(void *dst, uint32_t secno) {
@@ -224,6 +225,7 @@ readsect(void *dst, uint32_t secno) {
 
 <br>2、bootloader是如何加载ELF格式的OS？
 > * 在bootmain函数中加载ELF格式的OS。
+
 ```
     // read the 1st page off disk
     readseg((uintptr_t)ELFHDR, SECTSIZE * 8, 0);
@@ -247,6 +249,7 @@ readsect(void *dst, uint32_t secno) {
     ((void (*)(void))(ELFHDR->e_entry & 0xFFFFFF))();
 ```
 > * 先读出磁盘第一个扇区上的ELF Header，验证Header的正确性，再利用header里面的信息加载OS。
+
 ```
     	struct elfhdr {
         uint32_t e_magic;     // must equal ELF_MAGIC
@@ -266,12 +269,16 @@ readsect(void *dst, uint32_t secno) {
         uint16_t e_shstrndx;  // section number that contains section name strings
 	};
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> be3b5b5ad9e4123110a991a23f9a81a8b4fece1e
 <br>
 ## 练习5：实现函数调用堆栈跟踪函数
 > * 输出是
+
 ```
-    ebp:0x00007b08 eip:0x001009a6 args:0x00010094 0x00000000 
-0x00007b38 0x00100092 
+    ebp:0x00007b08 eip:0x001009a6 args:0x00010094 0x00000000 0x00007b38 0x00100092 
     kern/debug/kdebug.c:306: print_stackframe+21
     ebp:0x00007b18 eip:0x00100c95 args:0x00000000 0x00000000
     0x00000000 0x00007b88 
@@ -290,6 +297,7 @@ readsect(void *dst, uint32_t secno) {
     <unknow>: -- 0x00007d67 --
 ```
 > * 最后一行，各数字意义
+
 ```
     ebp表示bootmain栈底，bootloader设置堆栈起始地址
     为0x7c00，callbootmain 后即为0x7bf8eip表示返回
