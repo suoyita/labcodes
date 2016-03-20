@@ -153,6 +153,7 @@
     #  For backwards compatibility with the earliest PCs, physical
     #  address line 20 is tied low, so that addresses higher than
     #  1MB wrap around to zero by default. This code undoes this.
+
 seta20.1:
     inb $0x64, %al                                  # Wait for not busy(8042 input buffer empty).
     testb $0x2, %al
@@ -219,9 +220,9 @@ readsect(void *dst, uint32_t secno) {
     // read a sector
     insl(0x1F0, dst, SECTSIZE / 4);
 }
-```
 
-2、bootloader是如何加载ELF格式的OS？
+
+<br>2、bootloader是如何加载ELF格式的OS？
 > * 在bootmain函数中加载ELF格式的OS。
 ```
     // read the 1st page off disk
@@ -247,7 +248,7 @@ readsect(void *dst, uint32_t secno) {
 ```
 > * 先读出磁盘第一个扇区上的ELF Header，验证Header的正确性，再利用header里面的信息加载OS。
 ```
-    struct elfhdr {
+    	struct elfhdr {
         uint32_t e_magic;     // must equal ELF_MAGIC
         uint8_t e_elf[12];
         uint16_t e_type;      // 1=relocatable, 2=executable, 3=shared object, 4=core image
@@ -264,7 +265,7 @@ readsect(void *dst, uint32_t secno) {
         uint16_t e_shnum;     // number of entries in section header or 0
         uint16_t e_shstrndx;  // section number that contains section name strings
 	};
-
+```
 <br>
 ## 练习5：实现函数调用堆栈跟踪函数
 > * 输出是
